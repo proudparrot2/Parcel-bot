@@ -78,8 +78,7 @@ client.on('interactionCreate', async interaction => {
 });
 
 client.on("interactionCreate", async interaction => {
-  if (interaction.isButton()) {
-    if (interaction.member.user.bot) return;
+  if (interaction.isButton()) {if (interaction.member.user.bot) return;
 
     const type = interaction.customId;
 
@@ -92,7 +91,7 @@ client.on("interactionCreate", async interaction => {
     let user = await getUser(interaction.guild.id, interaction.member.user.id);
     if (!user.status) return await interaction.reply({ content: user.message, ephemeral: true });
     user = user.data;
-    if (user.count >= limit) return await interaction.reply({ content: `${Emojis.error} You have reached your limit of ${limit} links.`, ephemeral: true });
+    if (user.count >= limit) return await interaction.reply({ content: `You have reached your limit of ${limit} links.`, ephemeral: true });
     let links = await getLinks(interaction.guild.id, type);
     if (!links.status) return await interaction.reply({ content: links.message, ephemeral: true });
     links = links.data;
@@ -111,7 +110,7 @@ client.on("interactionCreate", async interaction => {
       user.count++;
     });
 
-    if (!link) return await interaction.reply({ content: Emojis.error + " No links available.", ephemeral: true });
+    if (!link) return await interaction.reply({ content: "No links available.", ephemeral: true });
 
     const member = client.users.cache.get(interaction.member.user.id);
 
@@ -131,6 +130,8 @@ client.on("interactionCreate", async interaction => {
     } catch {
       await interaction.reply({ content: Emojis.error + " I couldn't deliver your package! Are your DMs off?", ephemeral: true });
     }
+
+    await setUser(interaction.guild.id, interaction.member.user.id, user);
   }
 });
 

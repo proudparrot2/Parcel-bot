@@ -15,9 +15,12 @@ module.exports = {
     
     if (!limit) return await interaction.reply({ content: `${Emojis.error} You must specify a limit.`, ephemeral: true });
     const result = await setLimit(interaction.guild.id, limit);
-
+    const embed = new MessageEmbed()
+      .setTitle(`${Emojis.success} Successfully changed the link limit`)
+      .setDescription(`${Emojis.info} New limit\n${Emojis.reply} ${limit.toString()} links`)
+      .setColor("#2f3136")
     if (result.status) {
-      await interaction.reply({ content: `${Emojis.success} Successfully changed the link limit \n${Emojis.info} New Limit \n${Emojis.reply} \`${limit.toString()}\` links`, ephemeral: true });
+      await interaction.reply({ embeds: [embed], ephemeral: true });
     } else {
       await interaction.reply({ content: result.message, ephemeral: true });
     }

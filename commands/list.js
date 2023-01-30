@@ -6,9 +6,17 @@ module.exports = {
   data: new SlashCommandBuilder()
 	  .setName("list")
 	  .setDescription("List all links, or of a specified category.")
-    .addStringOption(option => option.setName("type").setDescription("The link type to list (optional)")),
+    .addSubcommand(subcommand =>
+      subcommand
+      .setName('links')
+      .setDescription('List all the links of a certain type')
+      .addStringOption(option => option.setName('category').setDescription('The category of the link').setRequired(true)))
+    .addSubcommand(subcommand =>
+      subcommand
+      .setName('types')
+      .setDescription('List all the link types')),
   async execute(interaction) {
-    const type = interaction.options.getString("type");
+    const type = interaction.options.getString("category");
     if (!type) {
       const result = await getTypes(interaction.guild.id);
       if (result.status) {
