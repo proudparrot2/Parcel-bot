@@ -1,0 +1,8 @@
+node_modules/
+.config/
+.upm/
+
+package-lock.json
+replit.nix
+.replit
+db.sqlite
