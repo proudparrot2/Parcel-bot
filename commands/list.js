@@ -6,8 +6,7 @@ module.exports = {
   data: new SlashCommandBuilder()
 	  .setName("list")
 	  .setDescription("List all links, or of a specified category.")
-    .addStringOption(option => option.setName("type")
-      .setDescription("The link type to list (optional)")),
+    .addStringOption(option => option.setName("type").setDescription("The link type to list (optional)")),
   async execute(interaction) {
     const type = interaction.options.getString("type");
     if (!type) {

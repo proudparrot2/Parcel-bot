@@ -13,12 +13,7 @@ module.exports = {
         .setRequired(true))
       .addStringOption(option => option.setName("url")
         .setDescription("The URL of the link")
-        .setRequired(true))
-  .addSubcommand(subcommand =>
-		subcommand
-			.setName('user')
-			.setDescription('Info about a user')
-			.addUserOption(option => option.setName('target').setDescription('The user'))),
+        .setRequired(true)),
     async execute(interaction) {
       if (interaction.options.getSubcommand() === 'user') {
         interaction.reply("no")
