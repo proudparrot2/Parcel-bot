@@ -91,7 +91,7 @@ client.on("interactionCreate", async interaction => {
     let user = await getUser(interaction.guild.id, interaction.member.user.id);
     if (!user.status) return await interaction.reply({ content: user.message, ephemeral: true });
     user = user.data;
-    if (user.count >= limit) return await interaction.reply({ content: `You have reached your limit of ${limit} links.`, ephemeral: true });
+    if (user.count >= limit) return await interaction.reply({ content: `${Emojis.error} You can't collect any more links.`, ephemeral: true });
     let links = await getLinks(interaction.guild.id, type);
     if (!links.status) return await interaction.reply({ content: links.message, ephemeral: true });
     links = links.data;
@@ -110,7 +110,7 @@ client.on("interactionCreate", async interaction => {
       user.count++;
     });
 
-    if (!link) return await interaction.reply({ content: "No links available.", ephemeral: true });
+    if (!link) return await interaction.reply({ content: Emojis.error + " No links available.", ephemeral: true });
 
     const member = client.users.cache.get(interaction.member.user.id);
 
@@ -120,9 +120,7 @@ client.on("interactionCreate", async interaction => {
       .setColor("2f3136")
       .addField(Emojis.link + " URL", `${Emojis.reply} ${link}`)
       .addField(Emojis.info + " Type", `${Emojis.reply} ${type}`)
-      .addField(Emojis.remaining + " Remaining", `${Emojis.reply} ${limit - user.count}`)
-      .setTimestamp()
-      .setFooter({ text: `Parcel`});
+      .addField(Emojis.remaining + " Links remaining", `${Emojis.reply} ${limit - user.count}`)
 
     try {
       await member.send({ embeds: [embed] });
