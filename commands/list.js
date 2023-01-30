@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const { getTypes, getLinks } = require("../db.js");
+const { Emojis } = require("../emojis.js")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -22,8 +23,9 @@ module.exports = {
       if (result.status) {
         result.data = result.data || [];
         const embed = new MessageEmbed()
-          .setTitle("Link types")
-          .setDescription(result.data.length > 0 ? result.data.join("\n") : "")
+          .setTitle(Emojis.link + " All link categories")
+          .setColor("#2f3136")
+          .setDescription(result.data.length > 0 ? result.data.join(`\n`) : "")
         await interaction.reply({ embeds: [embed], ephemeral: true });
       } else {
         await interaction.reply({ content: result.message, ephemeral: true });
@@ -33,7 +35,8 @@ module.exports = {
       if (result.status) {
         result.data = result.data || [];
         const embed = new MessageEmbed()
-          .setTitle(`${type} Links`)
+          .setTitle(`${Emojis.link} All ${type} links`)
+          .setColor("#2f3136")
           .setDescription(result.data.length > 0 ? result.data.join("\n") : "")
         await interaction.reply({ embeds: [embed], ephemeral: true });
       } else {
