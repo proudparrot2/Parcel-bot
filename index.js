@@ -116,8 +116,8 @@ client.on("interactionCreate", async interaction => {
 
     // send message
     const embed = new MessageEmbed()
-      .setTitle(`Your package is here!`)
       .setColor("2f3136")
+      .addField("📦 Your package is here!")
       .addField(Emojis.link + " URL", `${Emojis.reply} ${link}`)
       .addField(Emojis.info + " Type", `${Emojis.reply} ${type}`)
       .addField(Emojis.remaining + " Links remaining", `${Emojis.reply} ${limit - user.count}`)
