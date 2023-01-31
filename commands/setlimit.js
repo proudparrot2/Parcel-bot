@@ -12,7 +12,7 @@ module.exports = {
       .setRequired(true)),
   async execute(interaction) {
     const limit = interaction.options.getNumber("limit");
-    
+    if (!interaction.member.permissions.has("MANAGE_GUILD")) return interaction.reply({ content: Emojis.error + " You can't use this command", ephemeral: true })
     if (!limit) return await interaction.reply({ content: `${Emojis.error} You must specify a limit.`, ephemeral: true });
     const result = await setLimit(interaction.guild.id, limit);
     const embed = new MessageEmbed()

@@ -9,6 +9,7 @@ module.exports = {
 	  .setDescription("Reset link limits for one user or the entire server")
     .addUserOption(option => option.setName("target").setDescription("The user to reset")),
   async execute(interaction) {
+    if (!interaction.member.permissions.has("MANAGE_GUILD")) return interaction.reply({ content: Emojis.error + " You can't use this command", ephemeral: true })
     const target = interaction.options.getUser("target");
     
     if (target) {

@@ -17,6 +17,7 @@ module.exports = {
       .setName('types')
       .setDescription('List all the link types')),
   async execute(interaction) {
+    if (!interaction.member.permissions.has("MANAGE_GUILD")) return interaction.reply({ content: Emojis.error + " You can't use this command", ephemeral: true })
     const type = interaction.options.getString("category");
     if (!type) {
       const result = await getTypes(interaction.guild.id);

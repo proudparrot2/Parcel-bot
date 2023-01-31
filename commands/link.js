@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, CommandInteractionOptionResolver } = require("discord.js");
 
 const { addLink, removeLink } = require("../db.js");
 const { Emojis } = require("../emojis.js")
@@ -21,6 +21,7 @@ module.exports = {
         .addStringOption(option => option.setName('category').setDescription('The category of the link').setRequired(true))
         .addStringOption(option => option.setName('url').setDescription('The URL of the link').setRequired(true))),
     async execute(interaction) {
+      if (!interaction.member.permissions.has("MANAGE_GUILD")) return interaction.reply({ content: Emojis.error + " You can't use this command", ephemeral: true })
       if (interaction.options.getSubcommand() === 'add') {
         const category = interaction.options.getString("category");
         const url = interaction.options.getString("url");

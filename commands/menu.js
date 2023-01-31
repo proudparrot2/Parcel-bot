@@ -14,7 +14,7 @@ module.exports = {
     .addStringOption(option => option.setName("description")
       .setDescription("Embed description")),
   async execute(interaction) {
-
+    if (!interaction.member.permissions.has("MANAGE_GUILD")) return interaction.reply({ content: Emojis.error + " You can't use this command", ephemeral: true })
     const title = interaction.options.getString("title") || Emojis.link + " Link Dispenser";
     const description = interaction.options.getString("description") || "Click a button to receive one of it's corresponding links.";
     const color = "#2f3136"
