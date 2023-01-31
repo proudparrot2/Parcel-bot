@@ -1,3 +1,4 @@
+const { Interaction } = require("discord.js");
 const { QuickDB } = require("quick.db");
 const db = new QuickDB({ filePath: "database.sqlite" });
 const { Emojis } = require("./emojis.js")
@@ -81,6 +82,7 @@ async function removeLink (id, type, link) {
 async function getTypes (id) {
   if (!db.get(`servers.${id}`)) return error(`${Emojis.error} This server isn't registered in the database. Please contact the developer.`);
   let proxies = await db.get(`servers.${id}.proxies`);
+  if (!proxies) return error(`${Emojis.error} There are no links in the database.`)
   proxies = Object.entries(proxies).filter(([type, links]) => links.length > 0);
   proxies = Object.fromEntries(proxies);
   return success(Object.keys(proxies));
@@ -88,8 +90,8 @@ async function getTypes (id) {
 
 async function getLinks (id, type) {
   if (!db.get(`servers.${id}`)) return error(`${Emojis.error} This server isn't registered in the database. Please contact the developer.`);
-  let proxies = await db.get(`servers.${id}.proxies.${type}`) || [];
-  if (proxies.length <= 0) return error(Emojis.error + " No links found!");
+  let proxies = await db.get(`servers.${id}.proxies.${type}`);
+  if (!proxies || proxies.length <= 0) return error(Emojis.error + " No links found!");
   return success(proxies);
 }
 

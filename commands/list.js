@@ -32,6 +32,7 @@ module.exports = {
       }
     } else {
       const result = await getLinks(interaction.guild.id, type);
+      
       if (result.status) {
         result.data = result.data || [];
         const embed = new MessageEmbed()

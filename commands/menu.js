@@ -15,8 +15,8 @@ module.exports = {
       .setDescription("Embed description")),
   async execute(interaction) {
 
-    const title = interaction.options.getString("title") || "Get links";
-    const description = interaction.options.getString("description") || "Click a button to receive one of it's corresponding links!";
+    const title = interaction.options.getString("title") || Emojis.link + " Link Dispenser";
+    const description = interaction.options.getString("description") || "Click a button to receive one of it's corresponding links.";
     const color = "#2f3136"
     const style = "SECONDARY"
 

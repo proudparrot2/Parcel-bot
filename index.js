@@ -69,12 +69,7 @@ client.on('interactionCreate', async interaction => {
 
 	if (!command) return;
 
-	try {
-		await command.execute(interaction, client);
-	} catch (error) {
-		console.error(`[ERROR] ${error}`);
-		await interaction.reply({ content: Emojis.error + ' There was an error while executing this command! Try again in a little bit, or contact the developer if it persists.', ephemeral: true });
-	}
+	await command.execute(interaction, client);
 });
 
 client.on("interactionCreate", async interaction => {
@@ -117,10 +112,12 @@ client.on("interactionCreate", async interaction => {
     // send message
     const embed = new MessageEmbed()
       .setColor("2f3136")
-      .addField("📦 Your package is here!")
-      .addField(Emojis.link + " URL", `${Emojis.reply} ${link}`)
-      .addField(Emojis.info + " Type", `${Emojis.reply} ${type}`)
-      .addField(Emojis.remaining + " Links remaining", `${Emojis.reply} ${limit - user.count}`)
+      .setTitle("📦 Your package is here!")
+      .addFields(
+        { name: Emojis.link + ' URL', value: `${Emojis.reply} ${link}` },
+        { name: Emojis.info + ' Type', value: `${Emojis.reply} ${type}` },
+        { name: Emojis.remaining + " Links remaining", value: `${Emojis.reply} ${limit - user.count}` }
+      )
 
     try {
       await member.send({ embeds: [embed] });
@@ -133,4 +130,4 @@ client.on("interactionCreate", async interaction => {
   }
 });
 
-// client.login(token);
+client.login(token);
