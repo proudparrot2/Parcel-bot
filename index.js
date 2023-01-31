@@ -33,7 +33,7 @@ client.once('ready', () => {
   guilds.forEach((guildId) => {
     updateSlashCommands(guildId);
   });
-  client.user.setPresence({ activities: [{ name: 'with packages!' }], status: 'online' });
+  client.user.setPresence({ activities: [{ name: 'with links!' }], status: 'online' });
 
   console.log("[SYSTYEM] Updated slash commands ");
 	console.log(`[SYSTEM] Logged in as ${client.user.tag}!`);
