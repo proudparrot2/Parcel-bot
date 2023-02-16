@@ -6,6 +6,7 @@ const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const token = "MTAxNjY5Mjk5MDg3MTM0NzIyMA.GtO_Sq._zPN8ggduuym-kwZEDuhqgqzYobzD7DiuEA8JA";
+console.log(token)
 const { QuickDB } = require("quick.db")
 const db = new QuickDB({ filePath: "db.sqlite" })
 const { Emojis } = require("./emojis.js")
