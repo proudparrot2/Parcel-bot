@@ -10,7 +10,7 @@ const token = process.env.TOKEN;
 const { QuickDB } = require("quick.db")
 const db = new QuickDB({ filePath: "db.sqlite" })
 const { Emojis } = require("./emojis.js")
-
+// console.log("whatttttt")
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 const { addServer, removeServer, getLinks, getLimit, getUser, setUser } = require("./db.js");
