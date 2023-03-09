@@ -5,8 +5,8 @@ const { Client, Collection, Intents } = require('discord.js');
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const token = "MTAxNjY5Mjk5MDg3MTM0NzIyMA.GtO_Sq._zPN8ggduuym-kwZEDuhqgqzYobzD7DiuEA8JA";
-console.log(token)
+const token = process.env.TOKEN;
+// console.log(token)
 const { QuickDB } = require("quick.db")
 const db = new QuickDB({ filePath: "db.sqlite" })
 const { Emojis } = require("./emojis.js")
@@ -15,6 +15,13 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 const { addServer, removeServer, getLinks, getLimit, getUser, setUser } = require("./db.js");
 // client.on("debug", console.log)
+
+const http = require("http")
+const requestListener = function (req, res) {
+  res.writeHead(200);
+  res.end(`hi`);
+}
+http.createServer(requestListener).listen(process.env.PORT);
 
 client.commands = new Collection();
 client.cooldowns = new Set();
